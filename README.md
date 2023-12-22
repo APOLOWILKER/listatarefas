@@ -1,8 +1,8 @@
-#DESAFIO TECNICO
+# DESAFIO TECNICO
 
 Sistema de tarefas com React no front e Back-end em java com SpringBoot e banco de dados MySQL.
 
-##Requisitos do sistema
+## Requisitos do sistema
 
 - Criar e atualizar uma tarefa
 - cada tarefa tem descrição, estatus e uma imagem.
