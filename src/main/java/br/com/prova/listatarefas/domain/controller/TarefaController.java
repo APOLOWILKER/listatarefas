@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.prova.listatarefas.domain.DTO.TarefaDTO;
 import br.com.prova.listatarefas.domain.model.Tarefa;
 import br.com.prova.listatarefas.domain.service.TarefaService;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -59,11 +61,12 @@ public class TarefaController {
 
   @CrossOrigin
   @PutMapping("/{id}")
-  public ResponseEntity<Tarefa> updateTarefa(@PathVariable Long id, @RequestBody TarefaDTO dto) throws Exception {
+  public ResponseEntity<Tarefa> updateTarefa(@PathVariable Long id, @RequestBody @Valid TarefaDTO dto) throws Exception {
     var tarefa = this.service.updateTarefa(id, dto);
     if(Objects.isNull(tarefa)) {
       return new ResponseEntity<Tarefa>(HttpStatus.BAD_REQUEST);
     }
+
     return new ResponseEntity<Tarefa>(tarefa, HttpStatus.OK);
   }
 
