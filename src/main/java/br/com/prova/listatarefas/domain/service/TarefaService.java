@@ -3,13 +3,16 @@ package br.com.prova.listatarefas.domain.service;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.prova.listatarefas.domain.DTO.TarefaDTO;
 import br.com.prova.listatarefas.domain.model.Tarefa;
 import br.com.prova.listatarefas.domain.repository.TarefaRepository;
+import org.springframework.web.multipart.MultipartFile;
 
+@Transactional
 @Service
 public class TarefaService {
   @Autowired
@@ -33,6 +36,12 @@ public class TarefaService {
     var novaTarefa = this.findTarefaById(id);
     novaTarefa.atualizarTarefa(dto);
     return this.repository.save(novaTarefa);
+  }
+
+  public void updateTarefaImage(Long id, MultipartFile image) throws Exception {
+    var tarefa = this.findTarefaById(id);
+    tarefa.setImage(image.getBytes());
+    this.repository.save(tarefa);
   }
 
   public void deleteTarefa(Long id) throws Exception {

@@ -6,21 +6,13 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.prova.listatarefas.domain.DTO.TarefaDTO;
 import br.com.prova.listatarefas.domain.model.Tarefa;
 import br.com.prova.listatarefas.domain.service.TarefaService;
 import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -48,6 +40,7 @@ public class TarefaController {
       
       return ResponseEntity.ok().build();
   }
+
   
   @CrossOrigin
   @GetMapping("/{id}")
@@ -68,6 +61,13 @@ public class TarefaController {
     }
 
     return new ResponseEntity<Tarefa>(tarefa, HttpStatus.OK);
+  }
+
+  @CrossOrigin
+  @PutMapping("/{id}")
+  public ResponseEntity<Tarefa> updateTarefaImage(@PathVariable Long id, @RequestParam("image") MultipartFile image) throws Exception {
+    this.service.updateTarefaImage(id, image);
+    return new ResponseEntity<Tarefa>(HttpStatus.OK);
   }
 
   @CrossOrigin

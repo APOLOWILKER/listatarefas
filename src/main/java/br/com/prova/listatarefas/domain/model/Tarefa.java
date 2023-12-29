@@ -1,5 +1,6 @@
 package br.com.prova.listatarefas.domain.model;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
 
 import br.com.prova.listatarefas.domain.DTO.TarefaDTO;
@@ -31,7 +32,7 @@ public class Tarefa {
   @Column
   private Long id;
   
-  @NotNull(message = "Descrição é obrigatorio")
+  @NotBlank(message = "Descrição é obrigatorio")
   @Column
   private String description;
 
